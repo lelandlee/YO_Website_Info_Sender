@@ -78,23 +78,24 @@
 
 <body>
 	Yo username <input type="text" id ="yoUsername">
+	Yo API KEY <input type="text" id ="yoAPIKEY">
 	<button id="yoOneButton">Yo ONE</button>
-	<button id="yoAllButton">Yo ALL</button>
 
 	<script type="text/javascript">
 		var apiURL = 'https://api.justyo.co/';
 
 		$("#yoOneButton").click(function(){
 	    //pass the username typed in input field
-	    yoOne($("#yoUsername").val());
+	    yoOne($("#yoUsername").val(), $("#yoAPIKEY").val());
 		});
 
-		var yoOne = function(yoUsername){
-
+		var yoOne = function(yoUsername, yoAPIKEY){
+			if(yoAPIKEY === "")
+				yoAPIKEY = '963f906c-a42a-49c3-b106-806486bc38f9';
 			$.ajax({
 			  type: "POST",
 			  url: "http://api.justyo.co/yo/",
-			  data: {'api_token': '963f906c-a42a-49c3-b106-806486bc38f9', 'username': yoUsername}
+			  data: {'api_token': yoAPIKEY, 'username': yoUsername}
 			})
 			.done(function succesCallback (argument) {
 				console.log('success');
